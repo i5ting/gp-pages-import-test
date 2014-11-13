@@ -24,6 +24,8 @@ npm install --save-dev gulp-gh-pages
 
 并创建gulpfile.js文件，见本仓库根目录
 
+如果你不熟悉gulp，可以再这里https://github.com/i5ting/js-tools-best-practice/blob/master/doc/Gulp.md学习
+
 ### 3个步骤
 
 1、task 'generate'
@@ -77,21 +79,63 @@ gulp.task('deploy', function () {
 
 ```
 	➜  gp-pages-import-test git:(master) gulp
-	[18:13:31] Using gulpfile ~/workspace/github/gp-pages-import-test/gulpfile.js
-	[18:13:31] Starting 'deploy'...
-	[18:13:38] [gulp-gh-pages]: Cloning repo
-	[18:13:38] [gulp-gh-pages]: Create branch `gh-pages` and checkout
-	[18:13:38] [gulp-gh-pages]: Copying files to repository
-	[18:13:38] [gulp-gh-pages]: Adding 35 files.
-	[18:13:38] [gulp-gh-pages]: Commiting "Update 2014-11-13T10:13:31.279Z"
-	[18:13:38] [gulp-gh-pages]: Pushing to remote.
-	[18:13:45] Finished 'deploy' after 14 s
-	[18:13:45] Starting 'default'...
+	[22:15:16] Using gulpfile ~/workspace/github/gp-pages-import-test/gulpfile.js
+	[22:15:16] Starting 'generate'...
+	cp: img: No such file or directory
+	src path = /Users/sang/workspace/github/gp-pages-import-test
+	desc path = /Users/sang/workspace/github/gp-pages-import-test/preview
+	"start building......"
+	"process_with_one"
+	"build = /Users/sang/workspace/github/gp-pages-import-test/preview/README.html"
+	"0.4.1"
+	[22:15:17] Finished 'generate' after 725 ms
+	[22:15:17] Starting 'rename'...
+	[22:15:17] Finished 'rename' after 127 ms
+	[22:15:17] Starting 'deploy'...
+	[22:15:17] [gulp-gh-pages]: Cloning repo
+	[22:15:17] [gulp-gh-pages]: Checkout branch `gh-pages`
+	[22:15:18] [gulp-gh-pages]: Copying files to repository
+	[22:15:18] [gulp-gh-pages]: Adding 2 files.
+	[22:15:18] [gulp-gh-pages]: Commiting "Update 2014-11-13T14:15:17.666Z"
+	[22:15:18] [gulp-gh-pages]: Pushing to remote.
+	[22:15:30] Finished 'deploy' after 13 s
+	[22:15:30] Starting 'default'...
 	default
-	[18:13:45] Finished 'default' after 33 μs
+	[22:15:30] Finished 'default' after 27 μs
 ```
-
 
 然后访问 http://i5ting.github.io/gp-pages-import-test/ 即可理解看到效果
 
 注意：gh-pages第一次推送上去的时候需要大约10分钟左右的时间部署的。以后就实时更新了。
+
+## 总结
+
+使用gulp作为作业管理非常棒，可以方便的集成shell，命令以及nodejs脚本，还有gulp自己的插件。
+
+像gulp-gh-pages插件，在我们平时编写文档的过程中方便了好多。
+
+希望有更多人能够学会这种技术
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
+
+
+## 版本历史
+
+- v1.0.0 初始化版本
+
+## 欢迎fork和反馈
+
+- write by `i5ting` shiren1118@126.com
+
+如有建议或意见，请在issue提问或邮件
+
+## License
+
+this repo is released under the [MIT
+License](http://www.opensource.org/licenses/MIT).
