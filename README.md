@@ -1,4 +1,4 @@
-gp-pages-import-test
+gulp-gh-pages插件教程
 ====================
 
 perlican里用到py写的`ghp-import`命令
