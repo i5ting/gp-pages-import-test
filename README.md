@@ -7,14 +7,21 @@ perlican里用到py写的`ghp-import`命令
 
 那么nodejs里有没有呢？我找到2个
 
-
 ## 可选项
 
 - https://github.com/tschaub/gh-pages
 - https://github.com/rowoot/gulp-gh-pages
 
 ## 例子
+
 这里我们举一个例子，把README.md编译成html，并带有左侧目录功能，然后推送到git pages上。
+
+为什么要这样做呢？
+
+1. markdown编写文档非常方便
+2. md生成html的时候没有目录导航，所以需要i5ting_ztree_toc插件
+3. git pages是免费的http静态服务器，放文档或博客等静态网页再合适不过了
+
 ### 使用gulp
 
 ```
