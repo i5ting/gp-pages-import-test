@@ -115,6 +115,26 @@ gulp.task('deploy', function () {
 
 注意：gh-pages第一次推送上去的时候需要大约10分钟左右的时间部署的。以后就实时更新了。
 
+### 原理
+
+下面给出手动操作gh-pages分支的做法，非常繁琐
+
+```
+git checkout --orphan gh-pages
+git rm -rf .
+touch README.md
+git add README.md
+git commit -m "Init gh-pages"
+git push --set-upstream origin gh-pages
+git checkout master
+```
+
+实际上gulp-gh-pages插件把这些操作都封装到代码了。
+
+说的就这么简单，但实际里面判断的逻辑非常复杂，有兴趣的朋友自己看吧。
+
+[源码](https://github.com/rowoot/gulp-gh-pages)
+
 ## 总结
 
 使用gulp作为作业管理非常棒，可以方便的集成shell，命令以及nodejs脚本，还有gulp自己的插件。
