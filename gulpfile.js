@@ -27,5 +27,4 @@ gulp.task('generate',function () {
 
 gulp.task('default',['generate', 'rename', 'deploy'] ,function () {
     console.log('default');
-		
 });
