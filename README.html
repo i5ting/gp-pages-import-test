@@ -146,10 +146,56 @@
 <li>https://github.com/rowoot/gulp-gh-pages</li>
 </ul>
 
-<h2>gulp</h2>
+<h2>例子</h2>
+
+<p>这里我们举一个例子，把README.md编译成html，并带有左侧目录功能，然后推送到git pages上。</p>
+
+<h3>使用gulp</h3>
 <div class="highlight"><pre><span class="vg">npm</span><span class="w"> </span><span class="vg">install</span><span class="w"> </span><span class="o">--</span><span class="vg">save</span><span class="o">-</span><span class="vg">dev</span><span class="w"> </span><span class="vg">gulp</span>
 <span class="vg">npm</span><span class="w"> </span><span class="vg">install</span><span class="w"> </span><span class="o">--</span><span class="vg">save</span><span class="o">-</span><span class="vg">dev</span><span class="w"> </span><span class="vg">gulp</span><span class="o">-</span><span class="vg">gh</span><span class="o">-</span><span class="vg">pages</span>
 </pre></div>
+<p>并创建gulpfile.js文件，见本仓库根目录</p>
+
+<h3>3个步骤</h3>
+
+<p>1、task &#39;generate&#39;</p>
+
+<p>把README.md编译成html，并带有左侧目录功能。</p>
+
+<p>这里使用tocmd命令（tocmd 是一个ruby gem，用于把markdown文件生成带有toc目录的html文档。）</p>
+<div class="highlight"><pre><span class="vg">tocmd_conf</span><span class="w"> </span><span class="o">-</span><span class="vg">f</span><span class="w"> </span><span class="vg">README</span><span class="o">.</span><span class="vg">md</span><span class="w"> </span>
+</pre></div>
+<p>如果你本机没有安装的话，可以根据https://github.com/i5ting/tocmd.gem里的文档里安装方法</p>
+<div class="highlight"><pre><span class="vg">gem</span><span class="w"> </span><span class="vg">intall</span><span class="w"> </span><span class="vg">tocmd</span>
+</pre></div>
+<p>前提是你一定要ruby2.0以上的环境哦。</p>
+
+<p>2、task &#39;rename&#39;</p>
+
+<p>这步主要是，上一步生成的文件是README.md，而静态网站使用的是index.html，所以需要重命名。
+这里简单的把<code>./preview/README.html</code>文件复制为<code>./preview/index.html</code></p>
+<div class="highlight"><pre><span class="vg">cp</span><span class="w"> </span><span class="o">./</span><span class="vg">preview</span><span class="o">/</span><span class="vg">README</span><span class="o">.</span><span class="vg">html</span><span class="w"> </span><span class="o">./</span><span class="vg">preview</span><span class="o">/</span><span class="vg">index</span><span class="o">.</span><span class="vg">html</span>
+</pre></div>
+<p>3、task &#39;deploy&#39;</p>
+
+<p>把<code>./preview/**/*</code>目录的内容推送到git仓库的gh-pages分支上。</p>
+
+<h3>核心代码</h3>
+
+<p>这里主要使用gulp-gh-pages插件，它是会把指定目录的内容推送到git仓库的gh-pages分支上。
+利用git pages静态http server的特性可快速建立网站。</p>
+<div class="highlight"><pre><span class="vg">var</span><span class="w"> </span><span class="vg">gp_deploy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vg">require</span><span class="p">(</span><span class="c1">&#39;gulp-gh-pages&#39;);</span>
+
+<span class="vg">var</span><span class="w"> </span><span class="vg">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="vg">gulp</span><span class="o">.</span><span class="vg">task</span><span class="p">(</span><span class="c1">&#39;deploy&#39;, function () {</span>
+<span class="w">    </span><span class="vg">return</span><span class="w"> </span><span class="vg">gulp</span><span class="o">.</span><span class="vg">src</span><span class="p">(</span><span class="c1">&#39;./preview/**/*&#39;)</span>
+<span class="w">        </span><span class="o">.</span><span class="vg">pipe</span><span class="p">(</span><span class="vg">gp_deploy</span><span class="p">(</span><span class="vg">options</span><span class="p">));</span>
+<span class="p">});</span>
+</pre></div>
+<p>如果想了解更多配置，见https://github.com/rowoot/gulp-gh-pages</p>
+
+<h3>测试</h3>
+
 <p>执行gulp命令，结果如下：</p>
 <div class="highlight"><pre><span class="w">    </span><span class="err">➜</span><span class="w">  </span><span class="vg">gp</span><span class="o">-</span><span class="vg">pages</span><span class="o">-</span><span class="vg">import</span><span class="o">-</span><span class="vg">test</span><span class="w"> </span><span class="nl">git:</span><span class="p">(</span><span class="vg">master</span><span class="p">)</span><span class="w"> </span><span class="vg">gulp</span>
 <span class="w">    </span><span class="p">[</span><span class="il">18</span><span class="o">:</span><span class="il">13</span><span class="o">:</span><span class="il">31</span><span class="p">]</span><span class="w"> </span><span class="vg">Using</span><span class="w"> </span><span class="vg">gulpfile</span><span class="w"> </span><span class="o">~/</span><span class="vg">workspace</span><span class="o">/</span><span class="vg">github</span><span class="o">/</span><span class="vg">gp</span><span class="o">-</span><span class="vg">pages</span><span class="o">-</span><span class="vg">import</span><span class="o">-</span><span class="vg">test</span><span class="o">/</span><span class="vg">gulpfile</span><span class="o">.</span><span class="vg">js</span>
@@ -165,16 +211,9 @@
 <span class="w">    </span><span class="vg">default</span>
 <span class="w">    </span><span class="p">[</span><span class="il">18</span><span class="o">:</span><span class="il">13</span><span class="o">:</span><span class="il">45</span><span class="p">]</span><span class="w"> </span><span class="vg">Finished</span><span class="w"> </span><span class="c1">&#39;default&#39; after 33 μs</span>
 </pre></div>
-<p>分三步</p>
+<p>然后访问 http://i5ting.github.io/gp-pages-import-test/ 即可理解看到效果</p>
 
-<ul>
-<li>&#39;generate&#39;</li>
-<li>&#39;rename&#39;</li>
-<li>&#39;deploy&#39;</li>
-</ul>
-
-<p>然后
-open http://i5ting.github.io/gp-pages-import-test/</p>
+<p>注意：gh-pages第一次推送上去的时候需要大约10分钟左右的时间部署的。以后就实时更新了。</p>
 
 			          	</article>
 			        </div>
