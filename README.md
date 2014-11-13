@@ -39,5 +39,11 @@ npm install --save-dev gulp-gh-pages
 	[18:13:45] Finished 'default' after 33 μs
 ```
 
+分三步
 
+- 'generate'
+- 'rename'
+- 'deploy'
+
+然后
 open http://i5ting.github.io/gp-pages-import-test/
