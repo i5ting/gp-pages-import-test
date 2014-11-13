@@ -236,6 +236,23 @@
 
 <p>注意：gh-pages第一次推送上去的时候需要大约10分钟左右的时间部署的。以后就实时更新了。</p>
 
+<h3>原理</h3>
+
+<p>下面给出手动操作gh-pages分支的做法，非常繁琐</p>
+<div class="highlight"><pre><span class="vg">git</span><span class="w"> </span><span class="vg">checkout</span><span class="w"> </span><span class="o">--</span><span class="vg">orphan</span><span class="w"> </span><span class="vg">gh</span><span class="o">-</span><span class="vg">pages</span>
+<span class="vg">git</span><span class="w"> </span><span class="vg">rm</span><span class="w"> </span><span class="o">-</span><span class="vg">rf</span><span class="w"> </span><span class="o">.</span>
+<span class="vg">touch</span><span class="w"> </span><span class="vg">README</span><span class="o">.</span><span class="vg">md</span>
+<span class="vg">git</span><span class="w"> </span><span class="vg">add</span><span class="w"> </span><span class="vg">README</span><span class="o">.</span><span class="vg">md</span>
+<span class="vg">git</span><span class="w"> </span><span class="vg">commit</span><span class="w"> </span><span class="o">-</span><span class="vg">m</span><span class="w"> </span><span class="s2">&quot;Init gh-pages&quot;</span>
+<span class="vg">git</span><span class="w"> </span><span class="vg">push</span><span class="w"> </span><span class="o">--</span><span class="vg">set</span><span class="o">-</span><span class="vg">upstream</span><span class="w"> </span><span class="vg">origin</span><span class="w"> </span><span class="vg">gh</span><span class="o">-</span><span class="vg">pages</span>
+<span class="vg">git</span><span class="w"> </span><span class="vg">checkout</span><span class="w"> </span><span class="vg">master</span>
+</pre></div>
+<p>实际上gulp-gh-pages插件把这些操作都封装到代码了。</p>
+
+<p>说的就这么简单，但实际里面判断的逻辑非常复杂，有兴趣的朋友自己看吧。</p>
+
+<p><a href="https://github.com/rowoot/gulp-gh-pages">源码</a></p>
+
 <h2>总结</h2>
 
 <p>使用gulp作为作业管理非常棒，可以方便的集成shell，命令以及nodejs脚本，还有gulp自己的插件。</p>
