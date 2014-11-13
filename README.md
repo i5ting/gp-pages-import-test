@@ -143,6 +143,9 @@ git checkout master
 
 希望有更多人能够学会这种技术
 
+- https://github.com/i5ting/i5ting_ztree_toc
+- https://github.com/i5ting/tocmd.gem
+
 ## Contributing
 
 1. Fork it
