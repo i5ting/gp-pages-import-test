@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var deploy = require('gulp-gh-pages');
+var gp_deploy = require('gulp-gh-pages');
 var open = require("gulp-open");
 var rename = require("gulp-rename");
 require('shelljs/global');
@@ -7,7 +7,7 @@ require('shelljs/global');
 var options = {}
 gulp.task('deploy', function () {
     return gulp.src('./preview/**/*')
-        .pipe(deploy(options));
+        .pipe(gp_deploy(options));
 });
 
 gulp.task('rename',function () {
